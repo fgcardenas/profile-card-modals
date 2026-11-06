@@ -87,7 +87,10 @@ export default function App() {
     );
   };
 
-  // TODO STEP 2: write closeModal
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   // TODO STEP 4: write handleContactPress and handleConfirmShare
 
   // TODO STEP 5: wrap the whole screen in a SafeAreaView
@@ -218,19 +221,22 @@ export default function App() {
       </View>
 
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-        }}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <View style={{ backgroundColor: 'white', padding: 20 }}>
-            <Text>Hello, I am a Modal!</Text>
-            <Button
-              title="Close Modal"
-              onPress={() => setModalVisible(!modalVisible)}
-            />
+        onRequestClose={closeModal}
+      >
+        <View style={styles.overlay}>
+          <Pressable style={StyleSheet.absoluteFill} onPress={closeModal} />
+          <View style={styles.sheet}>
+            <Text style={styles.sheetTitle}>Share profile</Text>
+            <Text style={styles.sheetText}>Share Alex's profile with your team.</Text>
+            <Pressable
+              onPress={closeModal}
+              style={({ pressed }) => [styles.sheetClose, pressed && styles.pressed]}
+            >
+              <Text style={styles.sheetCloseText}>Close</Text>
+            </Pressable>
           </View>
         </View>
       </Modal>
