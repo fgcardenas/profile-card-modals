@@ -162,7 +162,21 @@ export default function App() {
             Tap a skill to select it · {selectedSkills.length} selected
           </Text>
 
-          {/* TODO STEP 3: add the 'Recent projects' horizontal ScrollView here (use PROJECTS) */}
+          <Text style={styles.sectionTitle}>RECENT PROJECTS</Text>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.projectsRow}
+          >
+            {PROJECTS.map((project) => (
+              <View key={project.name} style={styles.projectCard}>
+                <Text style={styles.projectName}>{project.name}</Text>
+                <Text style={styles.projectTech}>{project.tech}</Text>
+                <Text style={styles.projectStars}>★ {project.stars}</Text>
+              </View>
+            ))}
+          </ScrollView>
+
           <View style={styles.actions}>
             <Pressable
               onPress={handleFollowPress}
